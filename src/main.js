@@ -9,7 +9,7 @@ let config = {
 let game = new Phaser.Game(config);
 
 // set UI sizes
-
+// made changes
 
 // reserve keyboard bindings
 let keyF, keyR, keyLeft, keyRight, keyUp, keyDown, keyA, keyD, keyW, keyS;
