@@ -1,8 +1,8 @@
 // game configs
 let config = {
     type: Phaser.CANVAS,
-    width: 640,     // subject to change
-    height: 960,    // subject to change
+    width: 512,     // subject to change
+    height: 768,    // subject to change
     scene: [Loading, Menu, Play01, Instructions, Credits]
 }
 
