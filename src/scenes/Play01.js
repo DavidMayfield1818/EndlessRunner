@@ -4,7 +4,11 @@ class Play01 extends Phaser.Scene {
     }
 
     create() {
+        console.log('playing');
         // starting scene parameters
+        this.gravity = 0;
+
+        this.ball = new Ball(this, game.config.width/2, game.config.height/2);
 
         // audio
 
@@ -14,6 +18,10 @@ class Play01 extends Phaser.Scene {
         // set up player group
 
         // delay before start
+        this.time.delayedCall(2500, () => { 
+            // allow gravity to start now
+            // IDK rn
+        });
 
         // difficulty timer
 
@@ -23,6 +31,9 @@ class Play01 extends Phaser.Scene {
     update() {
         // check if ball off screen
 
+        // update ball
+        this.ball.update();
+        // update all players
         // update background
     }
 

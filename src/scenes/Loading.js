@@ -5,10 +5,10 @@ class Loading extends Phaser.Scene {
 
     preload() {
         // loading bar here
-
+        console.log('loading');
         this.load.path = './assets/';
         // load graphics
-
+        //this.load.image('ball', 'ball.png');
 
         // load audio
     }
@@ -18,6 +18,6 @@ class Loading extends Phaser.Scene {
 
 
         // go to next scene
-        
+        this.scene.start('play01Scene');
     }
 }
