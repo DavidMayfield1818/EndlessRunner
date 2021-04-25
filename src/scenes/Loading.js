@@ -20,4 +20,5 @@ class Loading extends Phaser.Scene {
         // go to next scene
         this.scene.start('play01Scene');
     }
+    // added a line to update doc
 }
