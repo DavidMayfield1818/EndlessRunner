@@ -7,6 +7,8 @@ class Play01 extends Phaser.Scene {
         console.log('playing');
         // starting scene parameters
         this.gravity = 0;
+        // loads background image
+        this.backGround = this.add.tileSprite(0,0,512,760,'Background').setOrigin(0,0);
 
         this.ball = new Ball(this, game.config.width/2, game.config.height/2);
 

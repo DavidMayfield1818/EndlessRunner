@@ -8,8 +8,8 @@ class Loading extends Phaser.Scene {
         console.log('loading');
         this.load.path = './assets/';
         // load graphics
-        //this.load.image('ball', 'ball.png');
-
+        this.load.image('ball', 'ball.png');
+        this.load.image('Background','Background.png')
         // load audio
     }
 
