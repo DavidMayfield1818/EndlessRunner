@@ -5,7 +5,7 @@ class Loading extends Phaser.Scene {
 
     preload() {
         // loading bar here
-        console.log('loading');
+        //console.log('loading');
         this.load.path = './assets/';
         // load graphics
         this.load.image('ball', 'ball.png');

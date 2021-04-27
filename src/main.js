@@ -1,3 +1,4 @@
+// increasing gravity mechanic stemmed from: phasergames.com/using-gravity-inphaser-3/
 // game configs
 let config = {
     type: Phaser.CANVAS,
@@ -11,7 +12,7 @@ let config = {
         default: 'arcade',
         arcade: {
             debug: true,
-            gravity: { y: 5000 }
+            gravity: { y: 0}
         }
     },
     scene: [Loading, Menu, Play01, Instructions, Credits]
