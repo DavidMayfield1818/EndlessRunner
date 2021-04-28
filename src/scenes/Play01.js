@@ -3,6 +3,12 @@ class Play01 extends Phaser.Scene {
         super("play01Scene");
     }
 
+    preload(){
+        this.load.image('Background', './assets/Background.png');
+        this.load.image('ball', './assets/ball.png');
+        this.gameOver = false;
+    }
+
     create() {
         // console.log('playing');
         // starting scene parameters
@@ -42,6 +48,33 @@ class Play01 extends Phaser.Scene {
             loop: true
         });
         // set up mouse input
+        
+        keyESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
+        keyR  =this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
+        
+        
+         // display score
+         let scoreConfig = {
+            fontFamily: 'Courier',
+            fontSize: '28px',
+            backgroundColor: '#F3B141',
+            color: '#843605',
+            align: 'right',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 300
+        }
+        scoreConfig.fixedWidth = 155;
+        this.gameover1 = this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
+        this.gameover1.visible = false;
+        scoreConfig.fixedWidth = 500;
+        scoreConfig.fontSize = '23px';
+        this.gameover2 = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ESC for Menu', scoreConfig).setOrigin(0.5);
+        this.gameover2.visible = false;
+        
+        
     }
 
     update() {
@@ -51,7 +84,27 @@ class Play01 extends Phaser.Scene {
         this.ball.update();
 
         // update background
+
+
+        
+
+        if(this.ball.y > game.config.height){
+            this.physics.pause();
+            this.gameover1.visible = true;
+            this.gameover2.visible = true;
+            this.gameOver = true;
+        }
+
+        
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.scene.restart();
+        }
+        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyESC)) {
+                this.scene.start("menuScene");
+        }
+       
     }
+
 
     spawnPlayer(inX = Phaser.Math.Between(35, this.game.config.width-35), inY = 0) {
         // after some condition spawn a new player
@@ -65,6 +118,7 @@ class Play01 extends Phaser.Scene {
                 this.spawnBad(inX,inY);
             }
         }
+        
     }
 
     spawnGood(inX,inY) {

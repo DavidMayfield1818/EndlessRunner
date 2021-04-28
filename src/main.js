@@ -15,11 +15,11 @@ let config = {
             gravity: { y: 0}
         }
     },
-    scene: [Loading, Menu, Play01, Instructions, Credits]
+    scene: [ Menu, Play01,Loading, Instructions, Credits]
 }
 
 let game = new Phaser.Game(config);
-
+let keyR, keyESC;
 // set UI sizes
 
 
