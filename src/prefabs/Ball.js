@@ -21,7 +21,7 @@ class Ball extends Phaser.Physics.Arcade.Sprite {
             }
         }, this);
         this.setVelocityX(this.xVel);
-        this.setVelocityY(this.yVel);
+        this.setVelocityY(this.yVel + this.scene.gravity);
         this.xVel *= 0.98;
         this.yVel *= 0.98;
         if(this.xVel < 4 && this.xVel > -4) {

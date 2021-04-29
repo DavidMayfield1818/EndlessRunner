@@ -18,7 +18,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
     update() {
         this.setVelocityX(this.xVel);
-        this.setVelocityY(this.yVel);
+        this.setVelocityY(this.yVel + this.scene.gravity);
         if(this.scene.physics.collide(this,this.scene.ball)&&!this.hasBall) {
             this.caught();
             //console.log('caught');
