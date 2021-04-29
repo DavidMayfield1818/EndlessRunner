@@ -13,6 +13,7 @@ class Play01 extends Phaser.Scene {
         // console.log('playing');
         // starting scene parameters
         this.gravity = 4000;
+        this.physics.world.setFPS(60);
         // loads background image
         this.backGround = this.add.tileSprite(0,0,512,768,'Background').setOrigin(0,0);
 
