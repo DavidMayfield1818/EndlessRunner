@@ -46,6 +46,13 @@ let config = {
     scene: [ Menu, Play01, Loading, Instructions, Credits]
 }
 
+let TimeStep = (this,{
+    min: 5,
+    target: 60,
+    forceSetTimeOut: true
+});
+
+
 let game = new Phaser.Game(config);
 let keyR, keyESC;
 // set UI sizes
