@@ -38,5 +38,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.target = false;
         this.hasBall = true;
         this.scene.ball.caught(this.x + 20, this.y + 70, this.body.velocity.y);
+        if(this.goodguy) {
+            this.scene.streak += 1;
+            this.scene.score += this.scene.streak;
+        } else {
+            this.scene.streak = 0;
+            this.scene.score -= 5;
+        }
+        this.scene.scoreText.text = this.scene.score;
     }
 }

@@ -13,6 +13,8 @@ class Play01 extends Phaser.Scene {
         // starting scene parameters
         this.gravIncVal = 20;
         this.gravIncCount = 0;
+        this.score = 0;
+        this.streak = 0;
 
         // loads background image
         this.backGround = this.add.tileSprite(0,0,512,768,'Background').setOrigin(0,0);
@@ -72,8 +74,8 @@ class Play01 extends Phaser.Scene {
         scoreConfig.fontSize = '23px';
         this.gameover2 = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ESC for Menu', scoreConfig).setOrigin(0.5);
         this.gameover2.visible = false;
-        
-        
+        scoreConfig.fixedWidth = 50;
+        this.scoreText = this.add.text(game.config.width/2, 64, this.score, scoreConfig).setOrigin(0.5);
     }
 
     update() {
@@ -98,7 +100,8 @@ class Play01 extends Phaser.Scene {
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyESC)) {
                 this.scene.start("menuScene");
         }
-       
+
+
     }
 
 
