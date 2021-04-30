@@ -30,7 +30,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(!this.goodguy) {
             this.angle += 10;
         }
-        this.setGravityY(this.scene.gravity);
 
         if(this.y>game.config.height+70) {
             this.destroy();

@@ -32,6 +32,11 @@ let config = {
     type: Phaser.CANVAS,
     width: 512,     // subject to change
     height: 768,    // subject to change
+    fps: {
+        min: 5,
+        target: 60,
+        forceSetTimeOut: true
+    },
 
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
