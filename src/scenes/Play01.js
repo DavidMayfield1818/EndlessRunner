@@ -6,6 +6,7 @@ class Play01 extends Phaser.Scene {
     preload(){
         this.load.image('Background', './assets/Background.png');
         this.load.image('ball', './assets/ball.png');
+        this.load.spritesheet('player', './assets/player.png', {frameWidth: 49, frameHeight: 49, startFrame: 0, endFrame: 4});
         this.gameOver = false;
     }
 
@@ -119,14 +120,14 @@ class Play01 extends Phaser.Scene {
     }
 
     spawnGood(inX,inY) {
-        let player = new Player(this,inX,inY,true);
+        let player = new Player(this,inX,inY,true,Phaser.Math.Between(0,4));
         player.body.setAllowGravity(false);
         this.playerGroup.add(player);
         this.lastPlayerBad = false;
     }
 
     spawnBad(inX,inY) {
-        let player = new Player(this,inX,inY,false);
+        let player = new Player(this,inX,inY,false,Phaser.Math.Between(0,4));
         player.body.setAllowGravity(false);
         this.playerGroup.add(player);
         this.lastPlayerBad = true;
