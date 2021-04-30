@@ -1,6 +1,6 @@
 class Player extends Phaser.Physics.Arcade.Sprite {
-    constructor (scene, x, y, gPlayer) {
-        super(scene, x, y, 'player');
+    constructor (scene, x, y, gPlayer,frame) {
+        super(scene, x, y, 'player',frame);
         //console.log('made player');
         scene.add.existing(this);
         scene.physics.add.existing(this);
