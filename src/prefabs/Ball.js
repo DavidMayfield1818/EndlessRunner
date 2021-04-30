@@ -21,7 +21,7 @@ class Ball extends Phaser.Physics.Arcade.Sprite {
             }
         }, this);
         this.setVelocityX(this.xVel);
-        this.setVelocityY(this.yVel + this.scene.gravity);
+        this.setVelocityY(this.yVel);
         this.xVel *= 0.98;
         this.yVel *= 0.98;
         if(this.xVel < 4 && this.xVel > -4) {
@@ -35,6 +35,7 @@ class Ball extends Phaser.Physics.Arcade.Sprite {
 
     caught(inX, inY) {
         // if player successfully passes ball to another alien
+        this.body.setAllowGravity(true);
         this.travelling = false;
         this.x = inX;
         this.y = inY;
