@@ -29,12 +29,11 @@ class Menu extends Phaser.Scene {
         menuConfig.backgroundColor = '#12672F';
 
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
-
         
+
         startButton.setInteractive();
         startButton.on('pointerdown', () => {
-            this.scene.start('play01Scene');  
-          this.scene.start('playScene');
+            this.scene.start('play01Scene'); 
         });
     }
 
