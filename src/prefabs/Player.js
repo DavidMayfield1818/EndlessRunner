@@ -6,8 +6,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         scene.physics.add.existing(this);
         this.setImmovable(true);
         this.body.setSize(70,140);
-        this.xVel = 0;
-        this.yVel = 0;
+        this.setVelocityY(50 + this.scene.gravIncVal*this.scene.gravIncCount);
         this.spawned = false;
         this.goodguy = gPlayer;
         // state variables for future
@@ -17,8 +16,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        this.setVelocityX(this.xVel);
-        this.setVelocityY(this.yVel);
         if(this.scene.physics.collide(this,this.scene.ball)&&!this.hasBall) {
             this.caught();
             //console.log('caught');
@@ -30,7 +27,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(!this.goodguy) {
             this.angle += 10;
         }
-        this.setGravityY(this.scene.gravity);
 
         if(this.y>game.config.height+70) {
             this.destroy();
@@ -41,6 +37,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     caught() {
         this.target = false;
         this.hasBall = true;
-        this.scene.ball.caught(this.x + 20, this.y + 70)
+        this.scene.ball.caught(this.x + 20, this.y + 70, this.body.velocity.y);
     }
 }

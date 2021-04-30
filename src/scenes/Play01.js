@@ -10,20 +10,19 @@ class Play01 extends Phaser.Scene {
     }
 
     create() {
-        // console.log('playing');
         // starting scene parameters
-        this.gravity = 4000;
+        this.gravIncVal = 20;
+        this.gravIncCount = 0;
+
         // loads background image
         this.backGround = this.add.tileSprite(0,0,512,768,'Background').setOrigin(0,0);
 
         this.ball = new Ball(this, game.config.width/2, game.config.height/2);
         this.ball.body.setAllowGravity(true);
-        this.ball.setGravityY(this.gravity);
         this.lastPlayerBad = true;
         // audio
 
         // particles for black hole
-
 
         // set up player group
         this.playerGroup = this.add.group({
@@ -47,14 +46,14 @@ class Play01 extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
-        // set up mouse input
-        
+
+        // set up keyboard input
         keyESC = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ESC);
         keyR  =this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         
         
-         // display score
-         let scoreConfig = {
+        // display score
+        let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
             backgroundColor: '#F3B141',
@@ -79,15 +78,6 @@ class Play01 extends Phaser.Scene {
 
     update() {
         // check if ball off screen
-
-        // update ball
-        this.ball.update();
-
-        // update background
-
-
-        
-
         if(this.ball.y > game.config.height){
             this.physics.pause();
             this.gameover1.visible = true;
@@ -95,7 +85,13 @@ class Play01 extends Phaser.Scene {
             this.gameOver = true;
         }
 
-        
+        if(!this.gameOver){
+            // update ball
+            this.ball.update();
+
+            // update background
+        }
+                
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
         }
@@ -108,7 +104,6 @@ class Play01 extends Phaser.Scene {
 
     spawnPlayer(inX = Phaser.Math.Between(35, this.game.config.width-35), inY = 0) {
         // after some condition spawn a new player
-        // might move this location to somewhere else depending
         if(this.lastPlayerBad) {
             this.spawnGood(inX,inY);
         } else {
@@ -118,30 +113,33 @@ class Play01 extends Phaser.Scene {
                 this.spawnBad(inX,inY);
             }
         }
-        
     }
 
     spawnGood(inX,inY) {
         let player = new Player(this,inX,inY,true);
-        player.body.setAllowGravity(true);
-        player.setGravityY(this.gravity);
+        player.body.setAllowGravity(false);
         this.playerGroup.add(player);
         this.lastPlayerBad = false;
     }
 
     spawnBad(inX,inY) {
         let player = new Player(this,inX,inY,false);
-        player.body.setAllowGravity(true);
-        player.setGravityY(this.gravity);
+        player.body.setAllowGravity(false);
         this.playerGroup.add(player);
         this.lastPlayerBad = true;
     }
 
     gravityIncrease() {
         // increase gravity
-        this.gravity += 2000;
-        this.ball.setGravityY(this.gravity);
+        this.gravIncCount += 1;
+        this.ball.setGravityY(this.ball.body.gravity.y+this.gravIncVal);
         console.log('gravity +');
+        this.playerGroup.children.entries.forEach(element => {
+            element.setVelocityY(this.gravIncVal+element.body.velocity.y);
+        });
+        if(!this.ball.travelling){
+            this.ball.setVelocityY(this.gravIncVal+this.ball.body.velocity.y);
+        }
         // increase black hole graphic size at the bottom
     }
 }
