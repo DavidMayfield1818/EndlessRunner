@@ -32,6 +32,11 @@ let config = {
     type: Phaser.CANVAS,
     width: 512,     // subject to change
     height: 768,    // subject to change
+    fps: {
+        min: 5,
+        target: 60,
+        forceSetTimeOut: true
+    },
 
     scale: {
         autoCenter: Phaser.Scale.CENTER_BOTH
@@ -43,8 +48,15 @@ let config = {
             gravity: { y: 0}
         }
     },
-    scene: [ Menu, Play01,Loading, Instructions, Credits]
+    scene: [ Menu, Play01, Loading, Instructions, Credits]
 }
+
+let TimeStep = (this,{
+    min: 5,
+    target: 60,
+    forceSetTimeOut: true
+});
+
 
 let game = new Phaser.Game(config);
 let keyR, keyESC;
