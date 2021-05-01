@@ -26,6 +26,22 @@ class Play01 extends Phaser.Scene {
         // audio
 
         // particles for black hole
+        let spawnLine = new Phaser.Geom.Line(0, 0, game.config.width, 0);
+        let deathLine = new Phaser.Geom.Line(0, game.config.hieght, game.config.width, game.config.hieght);
+
+        this.particleManager = this.add.particles('star');
+
+        this.dustEmitter = this.particleManager.createEmitter({
+            speedY: 200,
+            gravityY: 200,
+            lifespan: 2000,
+            quantity: 1,
+            alpha: {start: 0.8, end: 0},
+            emitZone: { type: 'random', source: spawnLine, quantity: 100},
+            deathZone: { source: deathLine},
+            //radial: true,
+            blendMode: 'SCREEN'
+        });
 
         // set up player group
         this.playerGroup = this.add.group({
@@ -47,7 +63,8 @@ class Play01 extends Phaser.Scene {
             delay: 10000,
             callback: this.gravityIncrease,
             callbackScope: this,
-            loop: true
+            //loop: true
+            repeat: 15
         });
 
         // set up keyboard input
@@ -138,6 +155,7 @@ class Play01 extends Phaser.Scene {
         this.gravIncCount += 1;
         this.ball.setGravityY(this.ball.body.gravity.y+this.gravIncVal);
         console.log('gravity +');
+        console.log(this.ball.body.gravity.y);
         this.playerGroup.children.entries.forEach(element => {
             element.setVelocityY(this.gravIncVal+element.body.velocity.y);
         });
