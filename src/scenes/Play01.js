@@ -14,6 +14,7 @@ class Play01 extends Phaser.Scene {
 
         // loads background image
         this.backGround = this.add.tileSprite(0,0,512,768,'Background').setOrigin(0,0);
+        this.Planet =  this.add.image(game.config.width/2 + 150, game.config.height/2 - 20, 'planet');
 
         this.ball = new Ball(this, game.config.width/2, game.config.height/2);
         this.ball.body.setAllowGravity(true);
@@ -123,6 +124,9 @@ class Play01 extends Phaser.Scene {
     }
 
     update() {
+        //planet rotate
+        this.Planet.rotation += 0.001;
+        
         if(!this.gameOver){
             // update ball
             this.ball.update();

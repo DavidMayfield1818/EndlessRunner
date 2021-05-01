@@ -13,6 +13,7 @@ class Loading extends Phaser.Scene {
         this.load.image('ball', 'ball.png');
         this.load.image('Background', 'Background.png')
         this.load.image('paticles', 'paticles.png')
+        this.load.image('planet', 'planet.png')
         this.load.spritesheet('player', 'player.png', {frameWidth: 49, frameHeight: 49, startFrame: 0, endFrame: 4});
         // load audio
     }
