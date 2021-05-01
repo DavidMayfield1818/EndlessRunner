@@ -57,13 +57,6 @@ class Play01 extends Phaser.Scene {
         // spawn first player
         this.spawnPlayer(this.game.config.width/2, game.config.height/2 - 200);
 
-        // // delay before start
-        // this.time.delayedCall(2500, () => { 
-        //     // allow gravity to start now
-        //     this.ball.body.setAllowGravity(true);
-        //     this.ball.setGravityY(this.gravity);
-        // });
-
         // difficulty timer
         this.difficultyTimer = this.time.addEvent({
             delay: 10000,
@@ -100,6 +93,10 @@ class Play01 extends Phaser.Scene {
         this.gameover2.visible = false;
         scoreConfig.fixedWidth = 50;
         this.scoreText = this.add.text(game.config.width/2, 64, this.score, scoreConfig).setOrigin(0.5);
+
+        scoreConfig.fixedWidth = 60;
+        this.backButton = this.add.text(game.config.width - 128, game.config.height - 64, 'Menu', scoreConfig).setOrigin(0.5);
+        this.backButton.visible = false;
     }
 
     update() {
@@ -114,6 +111,11 @@ class Play01 extends Phaser.Scene {
         if(this.ball.y > this.loseHeight){
             this.gameover1.visible = true;
             this.gameover2.visible = true;
+            this.backButton.visible = true;
+            this.backButton.setInteractive();
+            this.backButton.on('pointerdown', () => {
+                this.scene.start('menuScene'); 
+            });
             this.gameOver = true;
             this.ball.setVelocity(game.config.width/2 - this.ball.x, game.config.height - this.ball.y);
             this.physicsPause = this.time.addEvent({

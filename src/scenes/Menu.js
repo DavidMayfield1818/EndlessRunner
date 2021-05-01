@@ -25,8 +25,9 @@ class Menu extends Phaser.Scene {
         menuConfig.color = '#FFFFFF';
         let startButton = this.add.text(game.config.width/2, game.config.height/2 , 'Press R or click here to start', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#4892B4';
-        this.add.text(game.config.width/2, game.config.height/2 + 64, 'Use Mouse to click', menuConfig).setOrigin(0.5);
+        let InstructionText = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Instructions', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#12672F';
+        let creditText = this.add.text(game.config.width/2, game.config.height/2 + 128, 'Credits', menuConfig).setOrigin(0.5);
 
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         
@@ -34,6 +35,14 @@ class Menu extends Phaser.Scene {
         startButton.setInteractive();
         startButton.on('pointerdown', () => {
             this.scene.start('loadingScene'); 
+        });
+        InstructionText.setInteractive();
+        InstructionText.on('pointerdown', () => {
+            this.scene.start('instructionsScene'); 
+        });
+        creditText.setInteractive();
+        creditText.on('pointerdown', () => {
+            this.scene.start('creditsScene'); 
         });
     }
 
