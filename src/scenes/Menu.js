@@ -33,7 +33,7 @@ class Menu extends Phaser.Scene {
 
         startButton.setInteractive();
         startButton.on('pointerdown', () => {
-            this.scene.start('play01Scene'); 
+            this.scene.start('loadingScene'); 
         });
     }
 
@@ -42,7 +42,7 @@ class Menu extends Phaser.Scene {
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
             
             
-            this.scene.start('play01Scene');    
+            this.scene.start('loadingScene');    
         }
         
         

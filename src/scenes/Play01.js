@@ -3,19 +3,13 @@ class Play01 extends Phaser.Scene {
         super("play01Scene");
     }
 
-    preload(){
-        this.load.image('Background', './assets/Background.png');
-        this.load.image('ball', './assets/ball.png');
-        this.load.spritesheet('player', './assets/player.png', {frameWidth: 49, frameHeight: 49, startFrame: 0, endFrame: 4});
-        this.gameOver = false;
-    }
-
     create() {
         // starting scene parameters
         this.gravIncVal = 20;
         this.gravIncCount = 0;
         this.score = 0;
         this.streak = 0;
+        this.gameOver = false;
 
         // loads background image
         this.backGround = this.add.tileSprite(0,0,512,768,'Background').setOrigin(0,0);
@@ -36,7 +30,7 @@ class Play01 extends Phaser.Scene {
             gravityY: 200,
             lifespan: 2000,
             quantity: 1,
-            alpha: {start: 0.8, end: 0},
+            alpha: {start: 0.8, end: 0.2},
             emitZone: { type: 'random', source: spawnLine, quantity: 100},
             deathZone: { source: deathLine},
             //radial: true,
@@ -116,7 +110,7 @@ class Play01 extends Phaser.Scene {
             this.scene.restart();
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyESC)) {
-                this.scene.start("menuScene");
+            this.scene.start("menuScene");
         }
 
 
