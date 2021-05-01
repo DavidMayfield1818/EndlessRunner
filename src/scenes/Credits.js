@@ -27,11 +27,25 @@ class Credits extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 + 32, 'Longyu Li - Code', menuConfig).setOrigin(0.5);
         this.add.text(game.config.width/2, game.config.height/2 + 64, 'Kendrick Le - Art', menuConfig).setOrigin(0.5);
 
-        let backButton = this.add.text(game.config.width - 128, game.config.height - 64, 'Menu', menuConfig).setOrigin(0.5);
+        menuConfig.backgroundColor = '#12672F';
+        let backButton = this.add.text(game.config.width - 128, game.config.height - 64, '<- Menu', menuConfig).setOrigin(0.5);
 
         backButton.setInteractive();
         backButton.on('pointerdown', () => {
             this.scene.start('menuScene'); 
         });
+
+        backButton.on('pointerover', function () {
+
+            backButton.setBackgroundColor('#E3F021');
+            backButton.setColor('#000000')
+        });
+
+        backButton.on('pointerout', function () {
+
+            backButton.setBackgroundColor('#12672F');
+            backButton.setColor('#FFFFFF')
+        });
+
     }
 }

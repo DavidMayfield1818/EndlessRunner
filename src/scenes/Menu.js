@@ -3,6 +3,7 @@ class Menu extends Phaser.Scene {
         super("menuScene");
     }
 
+    
     create() {
         let menuConfig = {
             fontFamily: 'Courier',
@@ -36,18 +37,57 @@ class Menu extends Phaser.Scene {
         startButton.on('pointerdown', () => {
             this.scene.start('loadingScene'); 
         });
+
+        startButton.on('pointerover', function () {
+
+            startButton.setBackgroundColor('#E3F021');
+            startButton.setColor('#000000')
+        });
+
+        startButton.on('pointerout', function () {
+
+            startButton.setBackgroundColor('#900C3F');
+            startButton.setColor('#FFFFFF')
+        });
+
         InstructionText.setInteractive();
         InstructionText.on('pointerdown', () => {
             this.scene.start('instructionsScene'); 
         });
+
+        InstructionText.on('pointerover', function () {
+
+            InstructionText.setBackgroundColor('#E3F021');
+            InstructionText.setColor('#000000')
+        });
+
+        InstructionText.on('pointerout', function () {
+
+            InstructionText.setBackgroundColor('#4892B4');
+            InstructionText.setColor('#FFFFFF')
+        });
+
         creditText.setInteractive();
         creditText.on('pointerdown', () => {
             this.scene.start('creditsScene'); 
+        });
+
+        creditText.on('pointerover', function () {
+
+            creditText.setBackgroundColor('#E3F021');
+            creditText.setColor('#000000')
+        });
+
+        creditText.on('pointerout', function () {
+
+            creditText.setBackgroundColor('#12672F');
+            creditText.setColor('#FFFFFF')
         });
     }
 
     update() {
         // check if the buttons are clicked and move scene
+
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
             
             
