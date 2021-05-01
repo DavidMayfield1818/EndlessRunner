@@ -20,6 +20,29 @@ class Play01 extends Phaser.Scene {
         this.ball.setDepth(5);
 
         this.lastPlayerBad = true;
+
+        const particles = this.add.particles('paticles')
+
+        this.exhaustEmitter = particles.createEmitter({
+            
+            quantity: 1,
+            speedY: { min:20, max: 50},
+            speedX: { min:20, max: 50},
+            accelerationY: 1,
+            
+            //Lifespan: { min:100, max: 300},
+            //blendMode: 'ADD',
+            frequncey: 50,
+            scale: { start: 0.1, end: 0.1},
+            alpha:{ start: 0.6, end: 0,},
+            rotate:{min:-180, max: 180},
+            angle:{min:30, max: 110},
+            follow: this.ball,
+            
+            
+        })
+
+
         // audio
 
         // particles for black hole
@@ -105,6 +128,15 @@ class Play01 extends Phaser.Scene {
             this.ball.update();
 
             // update background
+        }
+
+        if(this.ball.travelling == false){
+            this.exhaustEmitter.visible = false;
+            
+            
+        }else{
+            this.exhaustEmitter.visible = true;
+            
         }
 
         // check if ball off screen
