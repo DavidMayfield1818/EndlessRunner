@@ -19,7 +19,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        if(this.scene.physics.collide(this,this.scene.ball)&&!this.hasBall) {
+        if(this.scene.physics.overlap(this,this.scene.ball)&&!this.hasBall) {
             this.caught();
             //console.log('caught');
         }
