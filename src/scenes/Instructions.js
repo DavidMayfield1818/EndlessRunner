@@ -24,12 +24,13 @@ class Instructions extends Phaser.Scene {
         menuConfig.backgroundColor = '#000000';
         menuConfig.color = '#FFFFFF';
         this.add.text(game.config.width/2, game.config.height/2, 'Click to kick the ball', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 32, 'The further you click the father it goes', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 64, 'Kick to you teammates to earn points', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 96, 'Every kick increases your streak', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 128, 'The streak points are worth more and more', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 160, 'Enemy player are -5 points and reset the streak', menuConfig).setOrigin(0.5);
-        this.add.text(game.config.width/2, game.config.height/2 + 192, 'The blackhole means game over', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 32, 'The further you click the farther it goes', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 64, 'Kick to your teammates to earn points', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 96, 'You can only kick if your temmate has the ball', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 128, 'Every kick increases your streak', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 160, 'The streak points are worth more and more', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 192, 'Enemy player are -5 points and reset the streak', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 + 224, 'The blackhole means game over', menuConfig).setOrigin(0.5);
 
         let backButton = this.add.text(game.config.width - 128, game.config.height - 64, 'Menu', menuConfig).setOrigin(0.5);
         
