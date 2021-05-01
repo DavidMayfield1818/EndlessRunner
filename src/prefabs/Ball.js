@@ -12,11 +12,14 @@ class Ball extends Phaser.Physics.Arcade.Sprite {
         this.setVelocity(xVel,yVel);
         this.kickFactor = 1;
         this.setGravityY(200);
+        this.sfxkick = scene.sound.add('kick');
     }
 
     update() {
         this.scene.input.on('pointerdown', function(pointer){
             if(!this.travelling){
+
+                this.sfxkick.play();
                 this.body.setAllowGravity(true);
                 let xVel = (pointer.x - this.x)*this.kickFactor;
                 let yVel = (pointer.y - this.y)*this.kickFactor;
