@@ -4,7 +4,7 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('menu','./assets/MenuBackground.png')
+        this.load.image('Menu','./assets/MenuBackground.png')
     }
     
     create() {
@@ -22,7 +22,7 @@ class Menu extends Phaser.Scene {
         }
         
         //loads image
-        this.menu = this.add.tileSprite(0,0,512,768,'menu').setOrigin(0,0);
+        this.menu = this.add.tileSprite(0,0,512,768,'Menu').setOrigin(0,0);
         
         // define keys
         this.add.text(game.config.width/2, game.config.height/2 - 64 - 30, 'Space', menuConfig).setOrigin(0.5);

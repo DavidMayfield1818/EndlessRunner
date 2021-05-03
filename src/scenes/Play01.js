@@ -13,8 +13,8 @@ class Play01 extends Phaser.Scene {
         this.loseHeight = game.config.height-16;
 
         // loads background image
-        this.backGround = this.add.tileSprite(0,0,512,768,'Background').setOrigin(0,0);
-        this.Planet =  this.add.image(game.config.width/2 + 150, game.config.height/2 - 20, 'planet');
+        this.backGround = this.add.tileSprite(0,0,512,768,'master_atlas','Background').setOrigin(0,0);
+        this.Planet =  this.add.image(game.config.width/2 + 150, game.config.height/2 - 20, 'master_atlas', 'planet');
         
         // set up ball
         this.ball = new Ball(this, game.config.width/2, game.config.height/2);
@@ -22,8 +22,9 @@ class Play01 extends Phaser.Scene {
         this.ball.setDepth(5);
 
         this.lastPlayerBad = true;
+        this.lastSpawnX = -100;
 
-        const particles = this.add.particles('paticles')
+        const particles = this.add.particles('master_atlas','paticles');
 
         this.exhaustEmitter = particles.createEmitter({
             
@@ -70,7 +71,7 @@ class Play01 extends Phaser.Scene {
         this.particleManager.setDepth(2);
 
         // blackhole
-        this.blackhole = this.add.sprite(game.config.width/2, game.config.height, 'blackhole').setOrigin(0.5, 1);
+        this.blackhole = this.add.sprite(game.config.width/2, game.config.height, 'master_atlas', 'BlackishHoleishRegionOverThere').setOrigin(0.5, 1);
         this.blackhole.scaleX = 0.5;
         this.blackhole.scaleY = 0.5;
         this.blackhole.setDepth(1);
@@ -91,7 +92,7 @@ class Play01 extends Phaser.Scene {
             key: 'wave',
             repeat: -1,
             frameRate: 10,
-            frames: this.anims.generateFrameNumbers('alien',{start: 0, end: 11})
+            frames: this.anims.generateFrameNames('master_atlas',{prefix: 'Alien', start: 1, end: 12, suffix: ''})
 
         });
 
@@ -99,7 +100,7 @@ class Play01 extends Phaser.Scene {
             key: 'BadWave',
             repeat: -1,
             frameRate: 10,
-            frames: this.anims.generateFrameNumbers('BadAlien',{start: 0, end: 11})
+            frames: this.anims.generateFrameNames('master_atlas',{prefix: 'Bad Alien', start: 1, end: 12, suffix: ''})
 
         });
 
@@ -107,7 +108,7 @@ class Play01 extends Phaser.Scene {
             key: 'hands',
             repeat: -1,
             frameRate: 0,
-            frames: this.anims.generateFrameNumbers('alien',{start:5, end:5})
+            frames: this.anims.generateFrameNames('master_atlas',{prefix: 'Alien', start:6, end:6, suffix: ''})
 
         });
 
@@ -115,7 +116,7 @@ class Play01 extends Phaser.Scene {
             key: 'BadHands',
             repeat: -1,
             frameRate: 0,
-            frames: this.anims.generateFrameNumbers('BadAlien',{start:5, end:5})
+            frames: this.anims.generateFrameNames('master_atlas',{prefix: 'Bad Alien', start:6, end:6, suffix: ''})
 
         });
     
@@ -237,7 +238,6 @@ class Play01 extends Phaser.Scene {
             }
         }
 
-
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
         }
@@ -249,6 +249,11 @@ class Play01 extends Phaser.Scene {
 
     spawnPlayer(inX = Phaser.Math.Between(35, this.game.config.width-35), inY = 0) {
         // after some condition spawn a new player
+        while(inX > this.lastSpawnX-35 && inX < this.lastSpawnX+35) {
+            inX = Phaser.Math.Between(35, this.game.config.width-35);
+        }
+
+        this.lastSpawnX = inX;
         let spaceRock = new Asteroid(this,inX,inY+60,Phaser.Math.Between(0,4));
         spaceRock.setVelocityY(50 + this.gravIncVal*this.gravIncCount);
         this.asteroidGroup.add(spaceRock);

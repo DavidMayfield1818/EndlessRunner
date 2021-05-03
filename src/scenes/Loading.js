@@ -44,18 +44,13 @@ class Loading extends Phaser.Scene {
         //console.log('loading');
         this.load.path = './assets/';
         // load graphics
+        this.load.atlas('master_atlas','MasterSheet.png','MasterSheet.json');
         this.load.image('star', 'star.png');
-        this.load.image('blackhole', 'BlackishHoleishRegionOverThere.png');
-        this.load.image('ball', 'ball.png');
-        this.load.image('Background', 'Background.png')
-        this.load.image('paticles', 'paticles.png')
-        this.load.image('planet', 'planet.png')
-        this.load.audio('bgm', 'bgm.m4a')
-        this.load.audio('kick','kick_sound.wav')
+        this.load.image('paticles', 'paticles.png');
+        this.load.audio('bgm', 'bgm.m4a');
+        this.load.audio('kick','kick_sound.wav');
         this.load.spritesheet('asteroids', 'asteroids.png', {frameWidth: 80, frameHeight: 80, startFrame: 0, endFrame: 4});
-        this.load.spritesheet('alien', 'AlienBig.png', {frameWidth: 90, frameHeight: 100, startFrame: 0, endFrame: 11});
-        this.load.spritesheet('BadAlien', 'BadAlien.png', {frameWidth: 90, frameHeight: 100, startFrame: 0, endFrame: 11});
-        // load audio
+
     }
 
     create() {

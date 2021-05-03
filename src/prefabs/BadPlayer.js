@@ -1,6 +1,6 @@
 class BadPlayer extends Phaser.Physics.Arcade.Sprite {
     constructor (scene, x, y) {
-        super(scene, x, y, 'BadAlien');
+        super(scene, x, y, 'master_atlas' ,'Bad Alien2');
         //console.log('made player');
         scene.add.existing(this);
         scene.physics.add.existing(this);

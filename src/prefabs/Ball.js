@@ -1,6 +1,6 @@
 class Ball extends Phaser.Physics.Arcade.Sprite {
     constructor (scene, x, y) {
-        super(scene, x, y, 'ball');
+        super(scene, x, y, 'master_atlas' ,'ball');
         //console.log('made ball');
         scene.add.existing(this);
         scene.physics.add.existing(this);
