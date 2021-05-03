@@ -80,6 +80,24 @@ class Play01 extends Phaser.Scene {
             runChildUpdate: true
         });
 
+        // animations for the alien
+
+        this.anims.create ({
+            key: 'wave',
+            repeat: -1,
+            frameRate: 10,
+            frames: this.anims.generateFrameNumbers('alien',{start: 0, end: 11})
+
+        });
+
+        this.anims.create ({
+            key: 'hands',
+            repeat: -1,
+            frameRate: 0,
+            frames: this.anims.generateFrameNumbers('alien',{start:5, end:5})
+
+        });
+    
         // spawn first player
         this.spawnPlayer(this.game.config.width/2, game.config.height/2 - 200);
 
@@ -218,14 +236,14 @@ class Play01 extends Phaser.Scene {
     }
 
     spawnGood(inX,inY) {
-        let player = new Player(this,inX,inY,true,Phaser.Math.Between(0,4));
+        let player = new Player(this,inX,inY,true);
         player.body.setAllowGravity(false);
         this.playerGroup.add(player);
         this.lastPlayerBad = false;
     }
 
     spawnBad(inX,inY) {
-        let player = new Player(this,inX,inY,false,Phaser.Math.Between(0,4));
+        let player = new Player(this,inX,inY,false);
         player.body.setAllowGravity(false);
         this.playerGroup.add(player);
         this.lastPlayerBad = true;

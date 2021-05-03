@@ -1,6 +1,6 @@
 class Player extends Phaser.Physics.Arcade.Sprite {
-    constructor (scene, x, y, gPlayer,frame) {
-        super(scene, x, y, 'player',frame);
+    constructor (scene, x, y, gPlayer) {
+        super(scene, x, y, 'alien');
         //console.log('made player');
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -16,8 +16,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.dead = false;
         this.delete = 10;
         this.setDepth(3);
-    }
 
+
+    }
     update() {
         if(this.scene.physics.overlap(this,this.scene.ball)&&!this.hasBall) {
             this.caught();
@@ -43,15 +44,25 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.delete -= 1;
             //console.log('destroyed');
         }
+
+        if(!this.hasBall) {
+            this.play('wave',true); 
+        }
+        else {
+            this.play('hands',true);
+        }
+
         if(this.delete <= 0) {
             this.destroy();
         }
+
+
     }
 
     caught() {
         this.target = false;
         this.hasBall = true;
-        this.scene.ball.caught(this.x + 20, this.y + 70, this.body.velocity.y);
+        this.scene.ball.caught(this.x + 0, this.y + -70, this.body.velocity.y);
         if(this.goodguy) {
             this.scene.score += this.scene.streak;
             this.scene.scoreAdditionText.text = '+' + this.scene.streak;

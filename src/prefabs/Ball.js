@@ -30,6 +30,8 @@ class Ball extends Phaser.Physics.Arcade.Sprite {
             }
         }, this);
         this.angle += 5;
+        
+    
     }
 
     caught(inX, inY, inYVel) {
