@@ -52,7 +52,7 @@ class Loading extends Phaser.Scene {
         this.load.image('planet', 'planet.png')
         this.load.audio('bgm', 'bgm.m4a')
         this.load.audio('kick','kick_sound.wav')
-        this.load.spritesheet('player', 'player.png', {frameWidth: 80, frameHeight: 80, startFrame: 0, endFrame: 4});
+        this.load.spritesheet('asteroids', 'asteroids.png', {frameWidth: 80, frameHeight: 80, startFrame: 0, endFrame: 4});
         this.load.spritesheet('alien', 'AlienBig.png', {frameWidth: 90, frameHeight: 100, startFrame: 0, endFrame: 11});
         // load audio
     }

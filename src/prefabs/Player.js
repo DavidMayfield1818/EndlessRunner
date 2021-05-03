@@ -17,6 +17,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.delete = 10;
         this.setDepth(3);
 
+        if(!this.goodguy) {
+            this.tint = 0xFF0000;
+        
+        }
+
 
     }
     update() {
@@ -28,9 +33,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.spawned = true;
             this.scene.spawnPlayer();
         }
-        if(!this.goodguy) {
-            this.angle += 10;
-        }
+
         if(this.y > this.scene.loseHeight && !this.dead) {
             this.setVelocity(game.config.width/2 - this.x, game.config.height - this.y);
             this.dead = true;
