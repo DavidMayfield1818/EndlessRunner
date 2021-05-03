@@ -221,7 +221,7 @@ class Play01 extends Phaser.Scene {
                     }
                 });
 
-                if(this.score > localStorage.getItem('highScore')){
+                if(this.score > localStorage.getItem('highscore')){
                     localStorage.setItem('highscore',this.score);
                     this.make.text({
                         x: game.config.width/2,
