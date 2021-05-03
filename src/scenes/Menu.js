@@ -4,9 +4,7 @@ class Menu extends Phaser.Scene {
     }
 
     preload() {
-        
         this.load.image('menu','./assets/MenuBackground.png')
-
     }
     
     create() {
@@ -46,13 +44,11 @@ class Menu extends Phaser.Scene {
         });
 
         startButton.on('pointerover', function () {
-
             startButton.setBackgroundColor('#E3F021');
             startButton.setColor('#000000')
         });
 
         startButton.on('pointerout', function () {
-
             startButton.setBackgroundColor('#900C3F');
             startButton.setColor('#FFFFFF')
         });
@@ -96,8 +92,6 @@ class Menu extends Phaser.Scene {
         // check if the buttons are clicked and move scene
 
         if (Phaser.Input.Keyboard.JustDown(keyR)) {
-            
-            
             this.scene.start('loadingScene');    
         }
         

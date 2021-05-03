@@ -15,8 +15,8 @@ class Play01 extends Phaser.Scene {
         // loads background image
         this.backGround = this.add.tileSprite(0,0,512,768,'Background').setOrigin(0,0);
         this.Planet =  this.add.image(game.config.width/2 + 150, game.config.height/2 - 20, 'planet');
-        let bgm = this.sound.add('bgm', {volume: 0.1})
-        bgm.play();
+        
+        // set up ball
         this.ball = new Ball(this, game.config.width/2, game.config.height/2);
         this.ball.body.setAllowGravity(true);
         this.ball.setDepth(5);
@@ -44,8 +44,9 @@ class Play01 extends Phaser.Scene {
             
         })
 
-
         // audio
+        let bgm = this.sound.add('bgm', {volume: 0.1})
+        bgm.play();
 
         // particles for black hole
         let spawnLine = new Phaser.Geom.Line(game.config.width * -0.5, 0, game.config.width * 1.5, 0);
@@ -96,7 +97,7 @@ class Play01 extends Phaser.Scene {
         keyR  =this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         
         
-        // display score
+        // text display
         let scoreConfig = {
             fontFamily: 'Courier',
             fontSize: '28px',
@@ -116,12 +117,27 @@ class Play01 extends Phaser.Scene {
         scoreConfig.fontSize = '23px';
         this.gameover2 = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ESC for Menu', scoreConfig).setOrigin(0.5);
         this.gameover2.visible = false;
+
+        scoreConfig.align = 'center';
         scoreConfig.fixedWidth = 50;
         this.scoreText = this.add.text(game.config.width/2, 64, this.score, scoreConfig).setOrigin(0.5);
-
         scoreConfig.fixedWidth = 60;
         this.backButton = this.add.text(game.config.width - 128, game.config.height - 64, 'Menu', scoreConfig).setOrigin(0.5);
         this.backButton.visible = false;
+        let scoreAddConfig = {
+            fontFamily: 'Courier',
+            fontSize: '24px',
+            color: '#FFFFFF',
+            align: 'center',
+            padding: {
+                top: 5,
+                bottom: 5,
+            },
+            fixedWidth: 50
+        }
+        this.scoreAdditionText = this.add.text(-100, -100, this.score, scoreAddConfig).setOrigin(0.5);
+        this.scoreAdditionText.visible = true;
+        this.scoreAdditionText.setDepth(15);
     }
 
     update() {
@@ -132,37 +148,38 @@ class Play01 extends Phaser.Scene {
             // update ball
             this.ball.update();
 
-            // update background
+            // show particles for trail
+            if(this.ball.travelling == false){
+                this.exhaustEmitter.visible = false;
+            }else{
+                this.exhaustEmitter.visible = true;
+            }
+
+            // check if ball off screen
+            if(this.ball.y > this.loseHeight){
+                this.gameover1.visible = true;
+                this.gameover2.visible = true;
+                this.gameover2.setInteractive();
+                this.gameover2.on('pointerdown', () => {
+                    this.scene.restart(); 
+                });
+                this.backButton.visible = true;
+                this.backButton.setInteractive();
+                this.backButton.on('pointerdown', () => {
+                    this.scene.start('menuScene'); 
+                });
+                this.gameOver = true;
+                this.ball.setVelocity(game.config.width/2 - this.ball.x, game.config.height - this.ball.y);
+                this.physicsPause = this.time.addEvent({
+                    delay: 1000,
+                    callback: () => {
+                        this.physics.pause();
+                        this.ball.setDepth(0);
+                    }
+                });
+            }
         }
 
-        if(this.ball.travelling == false){
-            this.exhaustEmitter.visible = false;
-            
-            
-        }else{
-            this.exhaustEmitter.visible = true;
-            
-        }
-
-        // check if ball off screen
-        if(this.ball.y > this.loseHeight){
-            this.gameover1.visible = true;
-            this.gameover2.visible = true;
-            this.backButton.visible = true;
-            this.backButton.setInteractive();
-            this.backButton.on('pointerdown', () => {
-                this.scene.start('menuScene'); 
-            });
-            this.gameOver = true;
-            this.ball.setVelocity(game.config.width/2 - this.ball.x, game.config.height - this.ball.y);
-            this.physicsPause = this.time.addEvent({
-                delay: 1000,
-                callback: () => {
-                    this.physics.pause();
-                    this.ball.setDepth(0);
-                }
-            });
-        }
 
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
             this.scene.restart();
@@ -170,8 +187,6 @@ class Play01 extends Phaser.Scene {
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyESC)) {
             this.scene.start("menuScene");
         }
-
-
     }
 
 

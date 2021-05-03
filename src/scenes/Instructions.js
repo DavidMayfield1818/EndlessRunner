@@ -42,13 +42,11 @@ class Instructions extends Phaser.Scene {
         });
 
         backButton.on('pointerover', function () {
-
             backButton.setBackgroundColor('#E3F021');
             backButton.setColor('#000000')
         });
 
         backButton.on('pointerout', function () {
-
             backButton.setBackgroundColor('#4892B4');
             backButton.setColor('#FFFFFF')
         });
