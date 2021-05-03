@@ -34,7 +34,7 @@ class Menu extends Phaser.Scene {
         let InstructionText = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Instructions', menuConfig).setOrigin(0.5);
         menuConfig.backgroundColor = '#12672F';
         let creditText = this.add.text(game.config.width/2, game.config.height/2 + 128, 'Credits', menuConfig).setOrigin(0.5);
-
+        menuConfig.backgroundColor = '#14c78c';
         this.add.text(game.config.width/2, game.config.height/2 + 192, 'Highscore: ' + localStorage.getItem('highscore'), menuConfig).setOrigin(0.5);
 
         keyR = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
