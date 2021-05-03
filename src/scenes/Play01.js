@@ -177,6 +177,20 @@ class Play01 extends Phaser.Scene {
                         this.ball.setDepth(0);
                     }
                 });
+
+                if(this.score > localStorage.getItem('highScore')){
+                    localStorage.setItem('highscore',this.score);
+                    this.make.text({
+                        x: game.config.width/2,
+                        y: game.config.height/2 - 80,
+                        text: 'NEW HIGHSCORE!',
+                        style: {
+                            font: '32px Courier',
+                            fill: '#ffffff',
+                            backgroundColor: 'black'
+                        }
+                    }).setOrigin(0.5);
+                }
             }
         }
 

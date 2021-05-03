@@ -5,6 +5,42 @@ class Loading extends Phaser.Scene {
 
     preload() {
         // loading bar here
+        let loadBox = this.add.graphics();
+        loadBox.fillStyle(0x381f52, 1);
+        loadBox.fillRect(32,game.config.height/2 - 16, (game.config.width - 64), 64);
+        let loadingBar = this.add.graphics();
+        this.make.text({
+            x: game.config.width/2,
+            y: game.config.height/2-30,
+            text: 'Loading...',
+            style: {
+                font: ' 18px Courier',
+                fill: '#ffffff'
+            }
+        }).setOrigin(0.5);
+
+        var percent = this.make.text({
+            x: game.config.width/2,
+            y: game.config.height/2+10,
+            text: '0%',
+            style: {
+                font: ' 18px Courier',
+                fill: '#ffffff'
+            }
+        });
+        percent.setOrigin(0.5,0);
+        
+        this.load.on('progress', (value) => {
+            percent.setText(parseInt(value * 100) + '%');
+            loadingBar.clear();
+            loadingBar.fillStyle(0x000000, 1);
+            loadingBar.fillRect(64,game.config.height/2, (game.config.width - 128) * value, 32);
+        });
+
+        this.load.on('complete', () => {
+            percent.destroy();
+            loadingBar.destroy();
+        })
         //console.log('loading');
         this.load.path = './assets/';
         // load graphics
@@ -21,9 +57,6 @@ class Loading extends Phaser.Scene {
     }
 
     create() {
-        // local storage if we need any
-
-
         // go to next scene
         this.scene.start('play01Scene');
     }
