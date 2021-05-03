@@ -10,7 +10,7 @@
 // Include one or more animated characters that use a texture atlas (5) - WIP - art is in the works, need to implement w sprite atlas though
 // Simulate scrolling with a tileSprite or equivalent means (5) - Done - particles being pulled into black hole
 // Implement proper collision detection (via Arcade Physics or your own detection routine) (5) - Done - ball collides w players, and bottom of screne for game over
-// Have looping background music (5) - WIP - need to make backgroud music loop
+// Have looping background music (5) - Done - added background music
 // Use sound effects for key mechanics, UI, and/or significant events appropriate to your game design (5) - WIP - need to record: kick, point score, black hole
 // Use randomness to generate challenge, e.g. terrain, pickups, etc. (5) - Done - players spawn at random locale at the top of scene
 // Include some metric of accomplishment that a player can improve over time, e.g., score, survival time, etc. (5) - Done - score counter at top of screen could look nicer though
