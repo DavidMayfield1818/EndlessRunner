@@ -19,6 +19,7 @@ class Asteroid extends Phaser.Physics.Arcade.Sprite {
             this.scaleX -= 0.1;
             this.scaleY -= 0.1;
             this.delete -= 1;
+            this.ange += 10;
             //console.log('destroyed');
         }
         if(this.delete <= 0) {
