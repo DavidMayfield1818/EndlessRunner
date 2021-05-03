@@ -300,4 +300,23 @@ class Play01 extends Phaser.Scene {
         }
         // increase black hole graphic size at the bottom
     }
+
+    pointAdd(inX,inY) {
+        this.scoreText.text = this.score;
+        this.scoreAdditionText.x = inX + 32;
+        this.scoreAdditionText.y = inY;
+        this.scoreAdditionText.alpha = 1;
+
+        this.time.addEvent({
+            delay: 30,
+            repeat: 61,
+            callback: () => {
+                if(!this.gameOver){
+                    this.scoreAdditionText.alpha -= 0.016;
+                    this.scoreAdditionText.x += 0.4;
+                    this.scoreAdditionText.y -= 0.6;
+                }
+            }
+        });
+    }
 }
