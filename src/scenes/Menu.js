@@ -10,7 +10,7 @@ class Menu extends Phaser.Scene {
     create() {
         let menuConfig = {
             fontFamily: 'Courier',
-            fontSize: '80px',
+            fontSize: '40px',
             backgroundColor: '#C275CF',
             color: '#FFFFFF',
             align: 'right',
@@ -25,7 +25,9 @@ class Menu extends Phaser.Scene {
         this.menu = this.add.tileSprite(0,0,512,768,'Menu').setOrigin(0,0);
         
         // define keys
-        this.add.text(game.config.width/2, game.config.height/2 - 64 - 30, 'Space', menuConfig).setOrigin(0.5);
+        this.add.text(game.config.width/2, game.config.height/2 - 64 - 30, 'Save the Space Ball', menuConfig).setOrigin(0.5);
+        menuConfig.fontSize = '14px';
+        this.add.text(game.config.width/2, game.config.height/2 - 64, 'Yes, it is worth dying for', menuConfig).setOrigin(0.5);
         menuConfig.fontSize = '26px';
         menuConfig.backgroundColor = '#900C3F';
         menuConfig.color = '#FFFFFF';
