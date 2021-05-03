@@ -85,7 +85,7 @@ class Play01 extends Phaser.Scene {
             runChildUpdate: true
         });
 
-        // animations for the alien
+        // animations for the alien and bad alien
 
         this.anims.create ({
             key: 'wave',
@@ -96,10 +96,26 @@ class Play01 extends Phaser.Scene {
         });
 
         this.anims.create ({
+            key: 'BadWave',
+            repeat: -1,
+            frameRate: 10,
+            frames: this.anims.generateFrameNumbers('BadAlien',{start: 0, end: 11})
+
+        });
+
+        this.anims.create ({
             key: 'hands',
             repeat: -1,
             frameRate: 0,
             frames: this.anims.generateFrameNumbers('alien',{start:5, end:5})
+
+        });
+
+        this.anims.create ({
+            key: 'BadHands',
+            repeat: -1,
+            frameRate: 0,
+            frames: this.anims.generateFrameNumbers('BadAlien',{start:5, end:5})
 
         });
     
@@ -136,17 +152,21 @@ class Play01 extends Phaser.Scene {
         scoreConfig.fixedWidth = 155;
         this.gameover1 = this.add.text(game.config.width/2, game.config.height/2, 'GAME OVER', scoreConfig).setOrigin(0.5);
         this.gameover1.visible = false;
+        this.gameover1.setDepth(5);
         scoreConfig.fixedWidth = 500;
         scoreConfig.fontSize = '23px';
         this.gameover2 = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (R) to Restart or ESC for Menu', scoreConfig).setOrigin(0.5);
         this.gameover2.visible = false;
+        this.gameover2.setDepth(5);
 
         scoreConfig.align = 'center';
         scoreConfig.fixedWidth = 50;
         this.scoreText = this.add.text(game.config.width/2, 64, this.score, scoreConfig).setOrigin(0.5);
+        this.scoreText.setDepth(5);
         scoreConfig.fixedWidth = 60;
         this.backButton = this.add.text(game.config.width - 128, game.config.height - 64, 'Menu', scoreConfig).setOrigin(0.5);
         this.backButton.visible = false;
+        this.backButton.setDepth(5);
         let scoreAddConfig = {
             fontFamily: 'Courier',
             fontSize: '24px',
@@ -252,7 +272,7 @@ class Play01 extends Phaser.Scene {
     }
 
     spawnBad(inX,inY) {
-        let player = new Player(this,inX,inY,false);
+        let player = new BadPlayer(this,inX,inY,false);
         player.body.setAllowGravity(false);
         this.playerGroup.add(player);
         this.lastPlayerBad = true;

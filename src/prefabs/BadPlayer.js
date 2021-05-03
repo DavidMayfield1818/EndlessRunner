@@ -1,6 +1,6 @@
-class Player extends Phaser.Physics.Arcade.Sprite {
+class BadPlayer extends Phaser.Physics.Arcade.Sprite {
     constructor (scene, x, y) {
-        super(scene, x, y, 'alien');
+        super(scene, x, y, 'BadAlien');
         //console.log('made player');
         scene.add.existing(this);
         scene.physics.add.existing(this);
@@ -8,7 +8,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.body.setSize(70,140);
         this.setVelocityY(50 + this.scene.gravIncVal*this.scene.gravIncCount);
         this.spawned = false;
-        this.goodguy = true;
+        this.goodguy = false;
         // state variables for future
         this.target = true;
         this.hasBall = false;
@@ -43,10 +43,10 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
 
         if(!this.hasBall) {
-            this.play('wave',true); 
+            this.play('BadWave',true); 
         }
         else {
-            this.play('hands',true);
+            this.play('BadHands',true);
         }
 
         if(this.delete <= 0) {
@@ -59,13 +59,9 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.hasBall = true;
         this.scene.ball.caught(this.x + 0, this.y + -70, this.body.velocity.y);
         
-        this.scene.score += this.scene.streak;
-        this.scene.scoreAdditionText.text = '+' + this.scene.streak;
-        this.scene.streak += 1;
-        
-        // this.scene.streak = 1;
-        // this.scene.scoreAdditionText.text = '-5';
-        // this.scene.score -= 5;
+        this.scene.streak = 1;
+        this.scene.scoreAdditionText.text = '-5';
+        this.scene.score -= 5;
     
         this.scene.scoreText.text = this.scene.score;
         this.scene.scoreAdditionText.x = this.x + 32;
