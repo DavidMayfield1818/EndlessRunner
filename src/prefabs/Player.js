@@ -80,9 +80,11 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             delay: 30,
             repeat: 61,
             callback: () => {
-                this.scene.scoreAdditionText.alpha -= 0.016;
-                this.scene.scoreAdditionText.x += 0.4;
-                this.scene.scoreAdditionText.y -= 0.6;
+                if(!this.scene.gameOver){
+                    this.scene.scoreAdditionText.alpha -= 0.016;
+                    this.scene.scoreAdditionText.x += 0.4;
+                    this.scene.scoreAdditionText.y -= 0.6;
+                }
             }
         });
     }
