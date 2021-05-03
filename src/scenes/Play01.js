@@ -46,8 +46,8 @@ class Play01 extends Phaser.Scene {
         })
 
         // audio
-        let bgm = this.sound.add('bgm', {volume: 0.1})
-        bgm.play();
+        this.bgm = this.sound.add('bgm', {volume: 0.1})
+        this.bgm.play();
 
         // particles for black hole
         let spawnLine = new Phaser.Geom.Line(game.config.width * -0.5, 0, game.config.width * 1.5, 0);
@@ -205,11 +205,13 @@ class Play01 extends Phaser.Scene {
                 this.gameover2.visible = true;
                 this.gameover2.setInteractive();
                 this.gameover2.on('pointerdown', () => {
+                    this.bgm.stop();
                     this.scene.restart(); 
                 });
                 this.backButton.visible = true;
                 this.backButton.setInteractive();
                 this.backButton.on('pointerdown', () => {
+                    this.bgm.stop();
                     this.scene.start('menuScene'); 
                 });
                 this.gameOver = true;
@@ -239,9 +241,11 @@ class Play01 extends Phaser.Scene {
         }
 
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)) {
+            this.bgm.stop();
             this.scene.restart();
         }
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyESC)) {
+            this.bgm.stop();
             this.scene.start("menuScene");
         }
     }

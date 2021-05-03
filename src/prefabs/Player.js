@@ -16,7 +16,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.dead = false;
         this.delete = 10;
         this.setDepth(3);
-
+        this.addpoint = scene.sound.add('addpoint', {volume: 0.5})
+        
     }
     update() {
         if(this.scene.physics.overlap(this,this.scene.ball)&&!this.hasBall) {
@@ -64,5 +65,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         this.scene.streak += 1;
 
         this.scene.pointAdd(this.x,this.y);
+        this.addpoint.play();
     }
 }

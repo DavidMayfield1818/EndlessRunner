@@ -16,6 +16,7 @@ class BadPlayer extends Phaser.Physics.Arcade.Sprite {
         this.dead = false;
         this.delete = 10;
         this.setDepth(3);
+        this.droppoint = scene.sound.add('droppoint', {volume: 0.5})
 
     }
     update() {
@@ -64,5 +65,6 @@ class BadPlayer extends Phaser.Physics.Arcade.Sprite {
         this.scene.score -= 5;
         
         this.scene.pointAdd(this.x,this.y);
+        this.droppoint.play();
     }
 }
