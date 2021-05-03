@@ -80,6 +80,11 @@ class Play01 extends Phaser.Scene {
             runChildUpdate: true
         });
 
+        // set up asteroid group
+        this.asteroidGroup = this.add.group({
+            runChildUpdate: true
+        });
+
         // animations for the alien
 
         this.anims.create ({
@@ -224,6 +229,10 @@ class Play01 extends Phaser.Scene {
 
     spawnPlayer(inX = Phaser.Math.Between(35, this.game.config.width-35), inY = 0) {
         // after some condition spawn a new player
+        let spaceRock = new Asteroid(this,inX,inY+60,Phaser.Math.Between(0,4));
+        spaceRock.setVelocityY(50 + this.gravIncVal*this.gravIncCount);
+        this.asteroidGroup.add(spaceRock);
+
         if(this.lastPlayerBad) {
             this.spawnGood(inX,inY);
         } else {
@@ -247,7 +256,6 @@ class Play01 extends Phaser.Scene {
         player.body.setAllowGravity(false);
         this.playerGroup.add(player);
         this.lastPlayerBad = true;
-        this.ball
     }
 
     gravityIncrease() {
@@ -263,6 +271,10 @@ class Play01 extends Phaser.Scene {
         this.playerGroup.children.entries.forEach(element => {
             element.setVelocityY(this.gravIncVal+element.body.velocity.y);
         });
+        this.asteroidGroup.children.entries.forEach(element => {
+            element.setVelocityY(this.gravIncVal+element.body.velocity.y);
+        });
+        
         if(!this.ball.travelling){
             this.ball.setVelocityY(this.gravIncVal+this.ball.body.velocity.y);
         }

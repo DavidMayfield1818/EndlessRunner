@@ -19,7 +19,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
 
         if(!this.goodguy) {
             this.tint = 0xFF0000;
-        
         }
 
 
@@ -58,8 +57,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         if(this.delete <= 0) {
             this.destroy();
         }
-
-
     }
 
     caught() {
